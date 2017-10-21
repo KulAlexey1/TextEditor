@@ -29,6 +29,10 @@
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="hIcon.ico" />
+    <Image Include="hIconSm.ico" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AB35C40F-C23D-4EA4-BE23-13EB73D2E966}</ProjectGuid>
     <RootNamespace>TextEditor</RootNamespace>

@@ -35,4 +35,12 @@
       <Filter>Файлы ресурсов</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="hIcon.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="hIconSm.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
