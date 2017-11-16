@@ -1,3 +1,11 @@
 ﻿  Main.c
+f:\оаип\курсовой проект\texteditor\texteditor\main.c(192): warning C4047: функция: "char *" отличается по уровням косвенного обращения от "char (*)[17]"
+f:\оаип\курсовой проект\texteditor\texteditor\main.c(192): warning C4024: _itoa_s: различные типы для формального и фактического параметров 2
+f:\оаип\курсовой проект\texteditor\texteditor\main.c(220): warning C4047: функция: "FILE *" отличается по уровням косвенного обращения от "FILE **"
+f:\оаип\курсовой проект\texteditor\texteditor\main.c(220): warning C4024: openFile: различные типы для формального и фактического параметров 2
+f:\оаип\курсовой проект\texteditor\texteditor\main.c(261): warning C4047: функция: "FILE *" отличается по уровням косвенного обращения от "FILE **"
+f:\оаип\курсовой проект\texteditor\texteditor\main.c(261): warning C4024: openFile: различные типы для формального и фактического параметров 2
+f:\оаип\курсовой проект\texteditor\texteditor\main.c(290): warning C4047: функция: "FILE *" отличается по уровням косвенного обращения от "FILE **"
+f:\оаип\курсовой проект\texteditor\texteditor\main.c(290): warning C4024: openFile: различные типы для формального и фактического параметров 2
   TextEditor.vcxproj -> F:\ОАИП\Курсовой проект\TextEditor\Debug\TextEditor.exe
   TextEditor.vcxproj -> F:\ОАИП\Курсовой проект\TextEditor\Debug\TextEditor.pdb (Partial PDB)
