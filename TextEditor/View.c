@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <windowsx.h>
+#include <Richedit.h>
 #include <stdio.h>
 #include <share.h>
 #include "View.h"
@@ -12,7 +13,7 @@ void DelCBorders(HWND hwnd)
 	SetWindowLong(hwnd, GWL_EXSTYLE, lExStyle);
 }
 
-OPENFILENAME InitOFN(HWND hwnd,  char *szOpenedFileName[MAX_PATH])
+OPENFILENAME InitOFN(HWND hwnd,  char *szOpenedFileName)
 {
 	OPENFILENAME ofn;
 
@@ -29,7 +30,7 @@ OPENFILENAME InitOFN(HWND hwnd,  char *szOpenedFileName[MAX_PATH])
 	return ofn;
 }
 
-OPENFILENAME InitSFN(HWND hwnd, char *szSavedFileName[MAX_PATH])
+OPENFILENAME InitSFN(HWND hwnd, char *szSavedFileName)
 {
 	OPENFILENAME sfn;
 
@@ -48,7 +49,7 @@ OPENFILENAME InitSFN(HWND hwnd, char *szSavedFileName[MAX_PATH])
 
 BOOLEAN openFile(HWND hwnd, FILE *stream, const char *szOpenedFileName, const char *mode)
 {
-	errno_t err = fopen_s(stream, szOpenedFileName, mode);
+	errno_t err = fopen_s((FILE**)stream, szOpenedFileName, mode);
 
 	if (err)
 	{
@@ -74,4 +75,19 @@ void append(char *subject, const char *insert, int pos) {
 	strcpy(buf + len, subject + pos); // Копируем в конец buf оставшиеся в subject символы
 
 	strcpy(subject, buf); // Копируем из buf в subject 
+}
+
+void getCaretPos(HWND hwndEdit, PCOORD pos)
+{	
+	DWORD endSel = 0;
+	LONG firstCharacter;
+	
+	// получение строки, на которой находится каретка (параметр wParam = -1, чтобы получить текущую позицию каретки)				
+	pos->Y = (LONG)SendMessage(hwndEdit, EM_LINEFROMCHAR, (WPARAM)-1, 0) + 1;
+	
+	// получение столбца, в котором находится каретка		
+	SendMessage(hwndEdit, EM_GETSEL, 0, (LPARAM)&endSel);
+
+	firstCharacter = SendMessage(hwndEdit, EM_LINEINDEX, (WPARAM)-1, 0);
+	pos->X = endSel - firstCharacter;
 }

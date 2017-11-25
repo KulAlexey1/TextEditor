@@ -42,11 +42,5 @@
     <Image Include="hIconSm.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="closeBMP.bmp">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="new_file.bmp">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
   </ItemGroup>
 </Project>

@@ -5,10 +5,19 @@
 #include "resource.h"
 #include "View.h"
 
-#pragma comment(lib, "comctl32.lib")
+#pragma comment(linker,"\"/manifestdependency:type='win32' \
+name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
+processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+
+//#pragma comment(lib, "comctl32.lib")
 
 const char mainWindowClassName[] = "MainWindowClass";
-const char closeButtonClassName[] = "CloseButtonClassName";
+
+const char appConfigFileName[MAX_PATH] = "AppConfig.txt";
+
+char *windowText;
+
+HWND hwndMenu;
 
 HWND hwndEdit;
 WNDPROC lpEditProc;
@@ -19,6 +28,7 @@ OPENFILENAME sfn;
 char szSavedFileName[MAX_PATH] = "";
 
 FILE *stream;
+BOOL isFileSaved;
 
 HWND hwndTB;
 HWND hwndSB;
@@ -26,27 +36,151 @@ HWND hwndSB;
 TBBUTTON tbB[10];
 TBADDBITMAP tbAB;
 
-LRESULT CALLBACK EditProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+HFONT hfFont;
+
+typedef struct
+{
+	LOGFONT lgFont;	
+	COLORREF rgbText;
+	COLORREF rgbBackground;
+	COLORREF rgbCustomBackground[16];
+	BOOL isSBShown;
+	BOOL isSoundKeysEnabled;
+} test;
+
+test *t;
+
+BOOL CALLBACK SaveWarningDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
-		case WM_CHAR:
+		case WM_INITDIALOG:
+		{
+			char text[50 + MAX_PATH];
+
+			wsprintf(text, "Вы хотите сохранить изменения в файле %s?", szOpenedFileName);
+			SetDlgItemText(hwnd, IDD_TEXT, text);
+
+			return TRUE;
+		}		
+		case WM_COMMAND:
+		{
+			switch (LOWORD(wParam))
+			{
+				case IDD_SAVE:
+					EndDialog(hwnd, IDD_SAVE);
+					break;
+				case IDD_NOTSAVE:
+					EndDialog(hwnd, IDD_NOTSAVE);
+					break;
+				case IDD_CANCEL:
+					EndDialog(hwnd, IDD_CANCEL);
+					break;
+			}
+		}
+		break;
+		case WM_CLOSE:
+			EndDialog(hwnd, IDD_CANCEL);
+		break;
+		default:
+			return FALSE;
+	}
+	return TRUE;
+}
+
+LRESULT CALLBACK EditProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{		
+		case WM_LBUTTONUP:
+		{
+			if (hwndSB != NULL)
+			{
+				char text[50];
+				PCOORD pos = malloc(sizeof(PCOORD));
+
+				getCaretPos(hwndEdit, pos);
+				wsprintf(text, "Строка %d, столбец %d", pos->Y, pos->X + 1);
+
+				SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
+			}
+		}
+		break;
+		case WM_KEYUP:
 		{
 			switch (wParam)
 			{
-				case 1: // CTRL + A
+				case VK_RIGHT:
+				case VK_LEFT:
+				case VK_UP:
+				case VK_DOWN:
+				case VK_HOME:
+				case VK_END:
 				{
-					SendMessage(hwnd, EM_SETSEL, 0, -1);
-					return 1;
+					if (hwndSB != NULL)
+					{
+						char text[50];
+						PCOORD pos = malloc(sizeof(PCOORD));
+
+						getCaretPos(hwndEdit, pos);
+						wsprintf(text, "Строка %d, столбец %d", pos->Y, pos->X + 1);
+
+						SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
+					}
 				}
 				break;
-				case 14: // CTRL + N
+			}				
+		}
+		break;
+		case WM_CHAR:
+		{
+			if (wParam == 14 || wParam == 15 || wParam == 19 || wParam == 6 || wParam == 18)
+				hwnd = FindWindow(mainWindowClassName, NULL);
+			switch (wParam)
+			{
+			case 1: // CTRL + A
+			{
+				SendMessage(hwndEdit, EM_SETSEL, 0, -1);
+
+				if (hwndSB != NULL)
 				{
-					//Doesn't work
-					SendMessage(hwnd, WM_COMMAND, ID_FILE_NEW, lParam);
-					return 14;
+					char text[50];
+					PCOORD pos = malloc(sizeof(PCOORD));
+
+					getCaretPos(hwndEdit, pos);
+					wsprintf(text, "Строка %d, столбец %d", pos->Y, pos->X + 1);
+
+					SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
 				}
-				break;
+
+				return 0;
+			}
+			break;
+			case 14: // CTRL + N
+			{
+				SendMessage(hwnd, WM_COMMAND, ID_FILE_NEW, lParam);
+			}
+			break;
+			case 15: // CTRL + O
+			{
+				SendMessage(hwnd, WM_COMMAND, ID_FILE_OPEN, lParam);
+			}
+			break;
+			case 19: // CTRL + S
+			{
+				SendMessage(hwnd, WM_COMMAND, ID_FILE_SAVE, lParam);
+			}
+			break;
+			case 6: // CTRL + F
+			{
+				SendMessage(hwnd, WM_COMMAND, ID_EDIT_FIND, lParam);
+			}
+			break;
+			case 18: // CTRL + R
+			{
+				SendMessage(hwnd, WM_COMMAND, ID_EDIT_REPLACE, lParam);
+			}
+			break;
 			}
 		}
 		break;
@@ -59,14 +193,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)
 	{
 		case WM_CREATE:
-		{
-			/*INITCOMMONCONTROLSEX icce;
-			icce.dwSize = sizeof(INITCOMMONCONTROLSEX);
-			icce.dwICC = ICC_BAR_CLASSES | ICC_COOL_CLASSES | ICC_USEREX_CLASSES;
-			InitCommonControlsEx(&icce);*/
+		{		
+			hwndMenu = GetMenu(hwnd);
 
 			hwndTB = CreateWindowEx(0, TOOLBARCLASSNAME, NULL, WS_CHILD | WS_VISIBLE | TBSTYLE_TOOLTIPS | TBSTYLE_FLAT, 0, 0, 0, 0,
 									hwnd, (HMENU)IDC_TOOLBAR, GetModuleHandle(NULL), NULL);
+
+			if (hwndTB == NULL)
+				MessageBox(hwnd, "Не удалось создать панель инструментов.", "Ошибка", MB_OK | MB_ICONERROR);
 
 			SendMessage(hwndTB, TB_BUTTONSTRUCTSIZE, (WPARAM)sizeof(TBBUTTON), 0);			
 
@@ -124,26 +258,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			tbB[9].iBitmap = STD_REPLACE;
 			tbB[9].fsState = TBSTATE_ENABLED;
 			tbB[9].fsStyle = TBSTYLE_BUTTON;
-			tbB[9].idCommand = ID_EDIT_REPLACE;						
-			
-			SendMessage(hwndTB, TB_ADDBUTTONS, sizeof(tbB) / sizeof(TBBUTTON), (LPARAM)&tbB);								
+			tbB[9].idCommand = ID_EDIT_REPLACE;												
 
-			hwndSB = CreateWindowEx(0, STATUSCLASSNAME, NULL, WS_CHILD | WS_VISIBLE | SBARS_SIZEGRIP, 0, 0, 0, 0,
-									hwnd, (HMENU)IDC_STATUSBAR, GetModuleHandle(NULL), NULL);
-
-			int statwidths[] = { 230, -1 };
-
-			SendMessage(hwndSB, SB_SETPARTS, sizeof(statwidths) / sizeof(int), (LPARAM)statwidths);
-			SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)"Hi there :)");
-
-			/*hBitmap = (HBITMAP)LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDB_NEWFILEBITMAP), IMAGE_BITMAP, 20, 20, LR_DEFAULTCOLOR);
-
-			if (hBitmap == NULL)
-				MessageBox(hwnd, "Could not load IDB_BALL!", "Error", MB_OK | MB_ICONEXCLAMATION);
-			
-			hwndButton = CreateWindowEx(0, "Button", "", WS_VISIBLE | WS_CHILD | BS_BITMAP, 4, 2, 20, 20, hwnd, (HMENU)IDC_CLOSE, GetModuleHandle(NULL), 0);
-
-			*/			
+			SendMessage(hwndTB, TB_ADDBUTTONS, sizeof(tbB) / sizeof(TBBUTTON), (LPARAM)&tbB);		
 
 			hwndEdit = CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT", "",
 				WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_HSCROLL | WS_EX_ACCEPTFILES | ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL,
@@ -152,51 +269,114 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			if (hwndEdit == NULL)
 				MessageBox(hwnd, "Не удалось создать окно редактирования.", "Ошибка", MB_OK | MB_ICONERROR);
 			
-			lpEditProc = (WNDPROC)SetWindowLongPtr(hwndEdit, GWL_WNDPROC, (LONG_PTR)&EditProc);	
-			
-			HFONT hfDefault;
+			lpEditProc = (WNDPROC)SetWindowLongPtr(hwndEdit, GWL_WNDPROC, (LONG_PTR)&EditProc);				
 
-			hfDefault = GetStockObject(DEFAULT_GUI_FONT);
-			SendMessage(hwndEdit, WM_SETFONT, (WPARAM)hfDefault, MAKELPARAM(FALSE, 0));			
-			
+			t = malloc(sizeof(test));					
+
+			//Инициализация значениями по умолчанию
+			hfFont = GetStockObject(DEFAULT_GUI_FONT);
+			GetObject(hfFont, sizeof(LOGFONT), &t->lgFont);
+
+			t->rgbText = RGB(0, 0, 0);
+			t->rgbBackground = RGB(255, 255, 255);
+			t->isSBShown = FALSE;
+			t->isSoundKeysEnabled = FALSE;
+
+			errno_t err = fopen_s(&stream, appConfigFileName, "r");
+
+			if (!err)
+			{
+				if (fread(t, sizeof(test), 1, stream) == 1)
+				{
+					hfFont = CreateFontIndirect(&t->lgFont);
+
+					SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
+					InvalidateRect(hwnd, NULL, FALSE);
+				}
+
+				fclose(stream);
+			}
+
+			SendMessage(hwndEdit, WM_SETFONT, (WPARAM)hfFont, MAKELPARAM(FALSE, 0));			
+
+			if (t->isSBShown)
+				SendMessage(hwnd, WM_COMMAND, ID_VIEW_STATUSBAR, NULL);
+			if (t->isSoundKeysEnabled)
+				SendMessage(hwnd, WM_COMMAND, ID_SOUND_KEYS, NULL);
+
+			/*if (openFile(hwnd, &stream, appConfigFileName, "r"))
+			{
+				if (fread(t, sizeof(test), 1, stream) != 1)
+				{
+					hfFont = GetStockObject(DEFAULT_GUI_FONT);
+					GetObject(hfFont, sizeof(LOGFONT), &t->lgFont);
+
+					t->rgbText = RGB(0, 0, 0);
+					t->rgbBackground = RGB(255, 255, 255);
+				}
+				else
+				{
+					hfFont = CreateFontIndirect(&t->lgFont);
+									
+					SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
+					InvalidateRect(hwnd, NULL, FALSE);
+				}
+
+				SendMessage(hwndEdit, WM_SETFONT, (WPARAM)hfFont, MAKELPARAM(FALSE, 0));
+				fclose(stream);
+			}*/
+
 			DelCBorders(hwnd);
 			DelCBorders(hwndEdit);
 			ofn = InitOFN(hwnd, szOpenedFileName);
 			sfn = InitSFN(hwnd, szSavedFileName);
 
-			SetFocus(hwndEdit);
-
-			/*
-			RegisterHotKey(hwnd, 0, MOD_CONTROL, 'N'); // Ctrl-N
-			RegisterHotKey(hwnd, 1, MOD_CONTROL, 'O'); // Ctrl-O									   
-			RegisterHotKey(hwnd, 2, MOD_CONTROL, 'S'); // Ctrl-S
-			RegisterHotKey(hwnd, 3, MOD_CONTROL, 'Z'); // Ctrl-Z	
-			RegisterHotKey(hwnd, 4, MOD_CONTROL, 'X'); // Ctrl-X
-			RegisterHotKey(hwnd, 5, MOD_CONTROL, 'C'); // Ctrl-C
-			RegisterHotKey(hwnd, 6, MOD_CONTROL, 'V'); // Ctrl-V
-			RegisterHotKey(hwnd, 7, NULL, VK_DELETE);  // DELETE
-			RegisterHotKey(hwnd, 8, MOD_CONTROL, 'A'); // Ctrl-A
-			RegisterHotKey(hwnd, 9, MOD_CONTROL, 'F'); // Ctrl-F
-			RegisterHotKey(hwnd, 10, MOD_CONTROL, 'H'); // Ctrl-H
-			*/
+			SetFocus(hwndEdit);					
 		}
 		break;		
+		case WM_CTLCOLOREDIT:
+		{
+			HDC hdc = (HDC)wParam;
+			SetTextColor(hdc, t->rgbText);
+			SetBkColor(hdc, t->rgbBackground);	
+			return (INT_PTR)CreateSolidBrush(t->rgbBackground);
+		}
+		break;
 		case WM_COMMAND:
-		{		
-			if (IDC_EDIT == LOWORD(wParam) && EN_CHANGE == HIWORD(wParam))
-			{	
-				POINT p;												
-				char text[17];
-
-				GetCaretPos(&p);
-				_itoa_s(p.x, &text, 17, 16);
-				
-				SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
-			}
+		{			
 			switch (LOWORD(wParam))
-			{					
+			{				
+				case IDC_EDIT:
+				{
+					if (HIWORD(wParam) == EN_CHANGE)
+					{
+						if (hwndSB != NULL)
+						{
+							char text[50];
+							PCOORD pos = malloc(sizeof(PCOORD));
+
+							getCaretPos(hwndEdit, pos);
+							wsprintf(text, "Строка %d, столбец %d", pos->Y, pos->X + 1);
+
+							SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
+						}
+
+						isFileSaved = FALSE;
+
+						MENUITEMINFO mii = { sizeof(MENUITEMINFO) };
+						mii.fMask = MIIM_STATE;
+						GetMenuItemInfo(hwndMenu, ID_SOUND_KEYS, FALSE, &mii);
+						
+						if (mii.fState == MFS_CHECKED)
+							Beep(30, 2);
+					}
+				}
+				break;
 				case ID_FILE_NEW:
 				{
+					isFileSaved = FALSE;
+					DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_SAVEWARNING), hwnd, SaveWarningDlgProc);
+
 					SetWindowText(hwnd, "Безымянный – Текстовый редактор");
 					SetDlgItemText(hwnd, IDC_EDIT, "");
 				}
@@ -205,17 +385,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				{
 					if (GetOpenFileName(&ofn)) //Действие, после выбора в диалоговом окне файла для открытия
 					{
-						char *fileName;
-						int fileNameLen;
 						char *fileText;
 						char paragraph[512];						
 
-						fileNameLen = strlen(szOpenedFileName) + strlen(" – Текстовый редактор") + 1;
-						fileName = (char*)calloc(fileNameLen, sizeof(char));						
-						strcat_s(fileName, fileNameLen, szOpenedFileName);
-						strcat_s(fileName, fileNameLen, " – Текстовый редактор");
+						windowText = (char*)calloc(strlen(szOpenedFileName) + strlen(" – Текстовый редактор") + 1, sizeof(char));
+						wsprintf(windowText, "%s – Текстовый редактор", szOpenedFileName);
 
-						SetWindowText(hwnd, fileName);
+						SetWindowText(hwnd, windowText);
+
+						free(windowText);
 
 						if (openFile(hwnd, &stream, szOpenedFileName, "r"))
 						{
@@ -242,6 +420,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 							SetDlgItemText(hwnd, IDC_EDIT, fileText);
 							SetFocus(hwndEdit);
 
+							isFileSaved = TRUE;
+
 							free(fileText);
 							fclose(stream);
 						}
@@ -265,6 +445,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 								editText = (char*)calloc(dwTextLength + 1, 1);
 								GetDlgItemText(hwnd, IDC_EDIT, editText, dwTextLength + 1);
 								fwrite(editText, 1, strlen(editText), stream);
+
+								isFileSaved = TRUE;
 
 								free(editText);
 								fclose(stream);
@@ -295,6 +477,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 								GetDlgItemText(hwnd, IDC_EDIT, editText, dwTextLength + 1);
 								fwrite(editText, 1, strlen(editText), stream);
 
+								isFileSaved = TRUE;
+								windowText = (char*)calloc(strlen(szSavedFileName) + strlen(" – Текстовый редактор") + 1, sizeof(char));
+								wsprintf(windowText, "%s – Текстовый редактор", szSavedFileName);
+
+								SetWindowText(hwnd, windowText);
+
+								free(windowText);
 								free(editText);
 								fclose(stream);
 							}
@@ -340,53 +529,100 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				{
 				}
 				break;
+				case ID_FORMAT_FONT:
+				{			
+					CHOOSEFONT cf = { sizeof(CHOOSEFONT) };
+
+					cf.Flags = CF_EFFECTS | CF_INITTOLOGFONTSTRUCT | CF_SCREENFONTS;
+					cf.hwndOwner = hwnd;
+					cf.lpLogFont = &t->lgFont;
+					cf.rgbColors = t->rgbText;				
+
+					if (ChooseFont(&cf))
+					{
+						hfFont = CreateFontIndirect(&t->lgFont);
+
+						if (hfFont)
+							SendMessage(hwndEdit, WM_SETFONT, (WPARAM)hfFont, MAKELPARAM(TRUE, 0));
+						else						
+							MessageBox(hwnd, "Не удалось применить выбранный шрифт.", "Ошибка", MB_OK | MB_ICONEXCLAMATION);
+												
+		
+						t->rgbText = cf.rgbColors;
+						SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
+					}
+				}
+				break;
+				case ID_FORMAT_BACKGROUNDCOLOR:
+				{
+					CHOOSECOLOR cc = { sizeof(CHOOSECOLOR) };
+
+					cc.Flags = CC_RGBINIT | CC_FULLOPEN | CC_ANYCOLOR;
+					cc.hwndOwner = hwnd;
+					cc.rgbResult = t->rgbBackground;
+					cc.lpCustColors = t->rgbCustomBackground;
+
+					if (ChooseColor(&cc))
+					{
+						t->rgbBackground = cc.rgbResult;
+						SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
+						InvalidateRect(hwnd, NULL, FALSE);
+						SetFocus(hwndEdit);
+					}
+				}
+				break;
 				case ID_VIEW_STATUSBAR:
 				{
+					MENUITEMINFO mii = { sizeof(MENUITEMINFO) };
+					mii.fMask = MIIM_STATE;
+					GetMenuItemInfo(hwndMenu, ID_VIEW_STATUSBAR, FALSE, &mii);
+					mii.fState ^= MFS_CHECKED;
+					SetMenuItemInfo(hwndMenu, ID_VIEW_STATUSBAR, FALSE, &mii);
+
+					if (mii.fState == MFS_CHECKED)
+					{
+						t->isSBShown = TRUE;
+
+						hwndSB = CreateWindowEx(0, STATUSCLASSNAME, NULL, WS_CHILD | WS_VISIBLE | SBARS_SIZEGRIP, 0, 0, 0, 0,
+												hwnd, (HMENU)IDC_STATUSBAR, GetModuleHandle(NULL), NULL);
+
+						if (hwndSB == NULL)
+							MessageBox(hwnd, "Не удалось создать строку состояния.", "Ошибка", MB_OK | MB_ICONERROR);
+
+						int statwidths[] = { 230, -1 };
+
+						SendMessage(hwndSB, SB_SETPARTS, sizeof(statwidths) / sizeof(int), (LPARAM)statwidths);
+
+						SendMessage(hwnd, WM_SIZE, 0, 0);
+						SendMessage(hwndEdit, WM_LBUTTONUP, 0, 0);
+					}
+					else
+					{
+						t->isSBShown = FALSE;
+
+						DestroyWindow(hwndSB);
+						hwndSB = NULL;
+						SendMessage(hwnd, WM_SIZE, 0, 0);
+					}
+				}
+				break;
+				case ID_SOUND_KEYS:
+				{
+					MENUITEMINFO mii = { sizeof(MENUITEMINFO) };
+					mii.fMask = MIIM_STATE;
+					GetMenuItemInfo(hwndMenu, ID_SOUND_KEYS, FALSE, &mii);
+					mii.fState ^= MFS_CHECKED;
+					SetMenuItemInfo(hwndMenu, ID_SOUND_KEYS, FALSE, &mii);	
+
+					if (mii.fState == MFS_CHECKED)
+						t->isSoundKeysEnabled = TRUE;
+					else
+						t->isSoundKeysEnabled = FALSE;
 				}
 				break;
 			}
 		}
-		break;		
-		/*case WM_HOTKEY:
-		{
-			switch (wParam)
-			{
-				case 0: // Ctrl-N
-					SendMessage(hwnd, WM_COMMAND, ID_FILE_NEW, 0);
-					break;
-				case 1: // Ctrl-O
-					SendMessage(hwnd, WM_COMMAND, ID_FILE_OPEN, 0);
-					break;
-				case 2: // Ctrl-S
-					SendMessage(hwnd, WM_COMMAND, ID_FILE_SAVE, 0);
-					break;
-				case 3: // Ctrl-Z
-					SendMessage(hwnd, WM_COMMAND, ID_EDIT_UNDO, 0);
-					break;
-				case 4: // Ctrl-X
-					SendMessage(hwnd, WM_COMMAND, ID_EDIT_CUT, 0);
-					break;
-				case 5: // Ctrl-C
-					SendMessage(hwnd, WM_COMMAND, ID_EDIT_COPY, 0);
-					break;
-				case 6: // Ctrl-V
-					SendMessage(hwnd, WM_COMMAND, ID_EDIT_INSERT, 0);
-					break;
-				case 7: // DELETE
-					SendMessage(hwnd, WM_COMMAND, ID_EDIT_DELETE, 0);
-					break;
-				case 8: // Ctrl-A
-					SendMessage(hwnd, WM_COMMAND, ID_EDIT_SELECTALL, 0);
-					break;
-				case 9: // Ctrl-F
-					SendMessage(hwnd, WM_COMMAND, ID_EDIT_FIND, 0);
-					break;
-				case 10: // Ctrl-H
-					SendMessage(hwnd, WM_COMMAND, ID_EDIT_REPLACE, 0);
-					break;					
-			}
-		}
-		break;*/
+		break;				
 		case WM_SIZE:
 		{
 			RECT rcTB;
@@ -416,20 +652,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 		case WM_CLOSE:
-		{
-			/*
-			UnregisterHotKey(hwnd, 0); // Ctrl-N
-			UnregisterHotKey(hwnd, 1); // Ctrl-O			
-			UnregisterHotKey(hwnd, 2); // Ctrl-S
-			UnregisterHotKey(hwnd, 3); // Ctrl-Z
-			UnregisterHotKey(hwnd, 4); // Ctrl-X
-			UnregisterHotKey(hwnd, 5); // Ctrl-C
-			UnregisterHotKey(hwnd, 6); // Ctrl-V
-			UnregisterHotKey(hwnd, 7); // DELETE
-			UnregisterHotKey(hwnd, 8); // Ctrl-A
-			UnregisterHotKey(hwnd, 9); // Ctrl-F
-			UnregisterHotKey(hwnd, 10); // Ctrl-H
-			*/
+		{		
+			if (openFile(hwnd, &stream, appConfigFileName, "w"))
+			{
+				fwrite(t, sizeof(test), 1, stream);
+
+				fclose(stream);
+			}
+
+			free(t);
+
 			DestroyWindow(hwnd);			
 		}
 		break;

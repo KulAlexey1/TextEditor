@@ -9,3 +9,5 @@ OPENFILENAME InitSFN(HWND, char*);
 BOOLEAN openFile(HWND, FILE*, const char*, const char*);
 
 void append(char*, const char*, int);
+
+void getCaretPos(HWND, PCOORD);
