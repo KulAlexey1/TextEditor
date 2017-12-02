@@ -50,7 +50,7 @@ OPENFILENAME InitSFN(HWND hwnd, char *szSavedFileName)
 
 BOOLEAN openFile(HWND hwnd, FILE *stream, const char *szOpenedFileName, const char *mode)
 {
-	errno_t err = fopen_s(stream, szOpenedFileName, mode);
+	errno_t err = fopen_s((FILE**)stream, szOpenedFileName, mode);
 
 	if (err)
 	{
@@ -107,7 +107,7 @@ BOOL getSaveWarningDialogResult(HWND hwnd, HWND hwndEdit, _In_opt_ DLGPROC lpDia
 		{
 			case IDD_SAVEWARNING_SAVE:
 			{
-				SendMessage(hwnd, WM_COMMAND, ID_FILE_SAVE, NULL);
+				SendMessage(hwnd, WM_COMMAND, (WPARAM)ID_FILE_SAVE, (LPARAM)NULL);
 				flag = FALSE;				
 			}
 			break;

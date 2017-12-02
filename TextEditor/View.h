@@ -13,6 +13,6 @@ void append(char*, const char*, int);
 
 void getCaretPos(HWND, PCOORD);
 
-BOOL getSaveWarningDialogResult(HWND, _In_opt_ DLGPROC, BOOL);
+BOOL getSaveWarningDialogResult(HWND, HWND, _In_opt_ DLGPROC, BOOL);
 
-char* strReplace(const char*, char*, char*, BOOL);
+char* strReplace(char*, char*, char*, BOOL);

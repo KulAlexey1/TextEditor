@@ -9,7 +9,6 @@
 name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
 processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
-//#pragma comment(lib, "comctl32.lib")
 
 const char mainWindowClassName[] = "MainWindowClass";
 
@@ -229,7 +228,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			int iSingleLength, length, startPos;
 			char *editText, *subStr;
 
-			if ((strlen(frBuff) != 0 && strcmp(frBuff, lpfr->lpstrFindWhat) != 0) || strlen(lpfr->lpstrReplaceWith) == 0)
+			if ((strlen(frBuff) != 0 && strcmp(frBuff, lpfr->lpstrFindWhat) != 0) || (strlen(lpfr->lpstrReplaceWith) == 0 && hwndR != NULL))
 				offset = 0;
 
 			strcpy_s(frBuff, 80, lpfr->lpstrFindWhat);
@@ -256,7 +255,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			// Функция _tcsstr, в случае обнаружения текста для поиска,
 			// возвращает текст из текста в котором осуществлялся поиск,
 			// который начинается с позиции найденного текста
-			subStr = _tcsstr(editText + offset, lpfr->lpstrFindWhat);
+			subStr = (char*)_tcsstr(editText + offset, lpfr->lpstrFindWhat);
 			
 			free(editText);
 
@@ -322,20 +321,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				// Приравнивание регистров, если не установлена галочка "С учётом регистра"
 				if (!(lpfr->Flags & FR_MATCHCASE))
 				{
-					for (int i = 0; i < strlen(selText); i++)
+					for (int i = 0; i < (int)strlen(selText); i++)
 						selText[i] = tolower(selText[i]);
 
-					for (int i = 0; i < strlen(lpfr->lpstrFindWhat); i++)
+					for (int i = 0; i < (int)strlen(lpfr->lpstrFindWhat); i++)
 						lpfr->lpstrFindWhat[i] = tolower(lpfr->lpstrFindWhat[i]);
 				}
 
-				if (strcmp(selText, lpfr->lpstrFindWhat) == 0)
-					SendMessage(hwndEdit, EM_REPLACESEL, TRUE, lpfr->lpstrReplaceWith);								
+				if (strcmp(selText, lpfr->lpstrFindWhat) == 0)				 
+					SendMessage(hwndEdit, EM_REPLACESEL, TRUE, (LPARAM)lpfr->lpstrReplaceWith);								
 
 				free(editText);
-				free(selText);
+				free(selText);				
 			}
-
+			
 			lpfr->Flags ^= FR_REPLACE;
 			lpfr->Flags += FR_FINDNEXT;
 
@@ -355,7 +354,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			editText = strReplace(editText, lpfr->lpstrFindWhat, lpfr->lpstrReplaceWith, lpfr->Flags & FR_MATCHCASE);
 
 			SendMessage(hwndEdit, EM_SETSEL, 0, -1);
-			SendMessage(hwndEdit, EM_REPLACESEL, TRUE, editText);
+			SendMessage(hwndEdit, EM_REPLACESEL, TRUE, (LPARAM)editText);
 			SendMessage(hwndEdit, EM_SETSEL, 0, 0);
 			SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
 
@@ -372,7 +371,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		case WM_CREATE:
 		{
-			hwndMenu = GetMenu(hwnd);
+			hwndMenu = (HWND)GetMenu(hwnd);
 
 			hwndTB = CreateWindowEx(0, TOOLBARCLASSNAME, NULL, WS_CHILD | WS_VISIBLE | TBSTYLE_TOOLTIPS | TBSTYLE_FLAT, 0, 0, 0, 0,
 				hwnd, (HMENU)IDC_TOOLBAR, GetModuleHandle(NULL), NULL);
@@ -486,7 +485,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				{
 					hfFont = CreateFontIndirect(&appInfo->lgFont);
 
-					SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
+					SendMessage(hwnd, WM_CTLCOLOREDIT, (WPARAM)GetDC(hwndEdit), (LPARAM)hwndEdit);
 					InvalidateRect(hwnd, NULL, FALSE);
 				}
 
@@ -496,9 +495,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			SendMessage(hwndEdit, WM_SETFONT, (WPARAM)hfFont, MAKELPARAM(FALSE, 0));			
 
 			if (appInfo->isSBShown)
-				SendMessage(hwnd, WM_COMMAND, ID_VIEW_STATUSBAR, NULL);
+				SendMessage(hwnd, WM_COMMAND, (WPARAM)ID_VIEW_STATUSBAR, (LPARAM)NULL);
 			if (appInfo->isSoundKeysEnabled)
-				SendMessage(hwnd, WM_COMMAND, ID_SOUND_KEYS, NULL);			
+				SendMessage(hwnd, WM_COMMAND, (WPARAM)ID_SOUND_KEYS, (LPARAM)NULL);			
 
 			DelCBorders(hwnd);
 			DelCBorders(hwndEdit);
@@ -565,7 +564,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 						MENUITEMINFO mii = { sizeof(MENUITEMINFO) };
 						mii.fMask = MIIM_STATE;
-						GetMenuItemInfo(hwndMenu, ID_SOUND_KEYS, FALSE, &mii);
+						GetMenuItemInfo((HMENU)hwndMenu, ID_SOUND_KEYS, FALSE, &mii);
 						
 						if (mii.fState == MFS_CHECKED)
 							Beep(30, 2);
@@ -600,7 +599,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 							free(windowText);
 
-							if (openFile(hwnd, &stream, fileName, "r"))
+							if (openFile(hwnd, (FILE*)&stream, fileName, "r"))
 							{
 								for (unsigned i = 0; fgets(paragraph, 512, stream) != NULL; i++)
 								{
@@ -643,7 +642,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 						//Если есть, что сохранять
 						if (dwTextLength > 0)
 						{
-							if (openFile(hwnd, &stream, fileName, "w"))
+							if (openFile(hwnd, (FILE*)&stream, fileName, "w"))
 							{
 								char *editText;
 
@@ -680,7 +679,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 						//Если есть, что сохранять
 						if (dwTextLength > 0)
 						{
-							if (openFile(hwnd, &stream, fileName, "w"))
+							if (openFile(hwnd, (FILE*)&stream, fileName, "w"))
 							{
 								char *editText;
 
@@ -738,7 +737,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					char *editText;
 					int caretPos, editTextLen;
 				
-					SendMessage(hwndEdit, EM_GETSEL, &caretPos, 0);
+					SendMessage(hwndEdit, EM_GETSEL, (WPARAM)&caretPos, 0);
 
 					editTextLen = GetWindowTextLength(hwndEdit);
 
@@ -748,10 +747,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					for (int i = 0; i < editTextLen; i++)
 						editText[i] = tolower(editText[i]);
 
-					SendMessage(hwndEdit, EM_SETSEL, 0, -1);
-					SendMessage(hwndEdit, EM_REPLACESEL, TRUE, editText);
-					SendMessage(hwndEdit, EM_SETSEL, caretPos, caretPos);
-					SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
+					SendMessage(hwndEdit, EM_SETSEL, (WPARAM)0, (LPARAM)-1);
+					SendMessage(hwndEdit, EM_REPLACESEL, (WPARAM)TRUE, (LPARAM)editText);
+					SendMessage(hwndEdit, EM_SETSEL, (WPARAM)caretPos, (LPARAM)caretPos);
+					SendMessage(hwndEdit, EM_SCROLLCARET, (WPARAM)0, (LPARAM)0);
 
 					free(editText);					
 				}
@@ -761,7 +760,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					char *editText;
 					int caretPos, editTextLen;
 
-					SendMessage(hwndEdit, EM_GETSEL, &caretPos, 0);
+					SendMessage(hwndEdit, EM_GETSEL, (WPARAM)&caretPos, 0);
 
 					editTextLen = GetWindowTextLength(hwndEdit);
 
@@ -771,10 +770,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					for (int i = 0; i < editTextLen; i++)
 						editText[i] = toupper(editText[i]);
 
-					SendMessage(hwndEdit, EM_SETSEL, 0, -1);
-					SendMessage(hwndEdit, EM_REPLACESEL, TRUE, editText);
-					SendMessage(hwndEdit, EM_SETSEL, caretPos, caretPos);
-					SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
+					SendMessage(hwndEdit, EM_SETSEL, (WPARAM)0, (LPARAM)-1);
+					SendMessage(hwndEdit, EM_REPLACESEL, (WPARAM)TRUE, (LPARAM)editText);
+					SendMessage(hwndEdit, EM_SETSEL, (WPARAM)caretPos, (LPARAM)caretPos);
+					SendMessage(hwndEdit, EM_SCROLLCARET, (WPARAM)0, (LPARAM)0);
 
 					free(editText);
 				}
@@ -783,6 +782,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				{
 					DestroyWindow(hwndR);
 					hwndR = NULL;
+					DestroyWindow(hwndF);
+					hwndF = NULL;
 					hwndF = FindText(&fr);
 				}
 				break;
@@ -790,6 +791,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				{
 					DestroyWindow(hwndF);
 					hwndF = NULL;
+					DestroyWindow(hwndR);
+					hwndR = NULL;
 					hwndR = ReplaceText(&fr);
 				}
 				break;
@@ -812,7 +815,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 							MessageBox(hwnd, "Не удалось применить выбранный шрифт.", "Ошибка", MB_OK | MB_ICONEXCLAMATION);
 														
 						appInfo->rgbText = cf.rgbColors;
-						SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
+						SendMessage(hwnd, WM_CTLCOLOREDIT, (WPARAM)GetDC(hwndEdit), (LPARAM)hwndEdit);
 					}
 				}
 				break;
@@ -828,7 +831,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					if (ChooseColor(&cc))
 					{
 						appInfo->rgbBackground = cc.rgbResult;
-						SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
+						SendMessage(hwnd, WM_CTLCOLOREDIT, (WPARAM)GetDC(hwndEdit), (LPARAM)hwndEdit);
 					}
 				}
 				break;
@@ -836,9 +839,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				{
 					MENUITEMINFO mii = { sizeof(MENUITEMINFO) };
 					mii.fMask = MIIM_STATE;
-					GetMenuItemInfo(hwndMenu, ID_VIEW_STATUSBAR, FALSE, &mii);
+					GetMenuItemInfo((HMENU)hwndMenu, ID_VIEW_STATUSBAR, FALSE, &mii);
 					mii.fState ^= MFS_CHECKED;
-					SetMenuItemInfo(hwndMenu, ID_VIEW_STATUSBAR, FALSE, &mii);
+					SetMenuItemInfo((HMENU)hwndMenu, ID_VIEW_STATUSBAR, FALSE, &mii);
 
 					if (mii.fState == MFS_CHECKED)
 					{
@@ -871,9 +874,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				{
 					MENUITEMINFO mii = { sizeof(MENUITEMINFO) };
 					mii.fMask = MIIM_STATE;
-					GetMenuItemInfo(hwndMenu, ID_SOUND_KEYS, FALSE, &mii);
+					GetMenuItemInfo((HMENU)hwndMenu, ID_SOUND_KEYS, FALSE, &mii);
 					mii.fState ^= MFS_CHECKED;
-					SetMenuItemInfo(hwndMenu, ID_SOUND_KEYS, FALSE, &mii);	
+					SetMenuItemInfo((HMENU)hwndMenu, ID_SOUND_KEYS, FALSE, &mii);
 
 					if (mii.fState == MFS_CHECKED)
 						appInfo->isSoundKeysEnabled = TRUE;
@@ -916,7 +919,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		{		
 			if (getSaveWarningDialogResult(hwnd, hwndEdit, SaveWarningDlgProc, isFileSaved))
 			{					
-				if (openFile(hwnd, &stream, appConfigFileName, "w"))
+				if (openFile(hwnd, (FILE*)&stream, appConfigFileName, "w"))
 				{
 					fwrite(appInfo, sizeof(appInformation), 1, stream);
 
