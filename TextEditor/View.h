@@ -1,5 +1,6 @@
 #pragma once
-#include <windows.h>
+#include <windows.h>     
+
 
 void DelCBorders(HWND);
 
@@ -11,3 +12,7 @@ BOOLEAN openFile(HWND, FILE*, const char*, const char*);
 void append(char*, const char*, int);
 
 void getCaretPos(HWND, PCOORD);
+
+BOOL getSaveWarningDialogResult(HWND, _In_opt_ DLGPROC, BOOL);
+
+char* strReplace(const char*, char*, char*, BOOL);

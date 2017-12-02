@@ -13,7 +13,7 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 const char mainWindowClassName[] = "MainWindowClass";
 
-const char appConfigFileName[MAX_PATH] = "AppConfig.txt";
+char appConfigFileName[MAX_PATH] = "AppConfig.txt";
 
 char *windowText;
 
@@ -23,18 +23,26 @@ HWND hwndEdit;
 WNDPROC lpEditProc;
 
 OPENFILENAME ofn;
-char szOpenedFileName[MAX_PATH] = "";
+char fileName[MAX_PATH];
 OPENFILENAME sfn;
-char szSavedFileName[MAX_PATH] = "";
 
 FILE *stream;
-BOOL isFileSaved;
+BOOL isFileSaved = TRUE;
 
 HWND hwndTB;
 HWND hwndSB;
 
 TBBUTTON tbB[10];
 TBADDBITMAP tbAB;
+
+FINDREPLACE fr;
+char findWhat[80];
+char replaceWith[80];
+HWND hwndF;
+HWND hwndR;
+UINT uFindReplaceMsg;
+char frBuff[80];
+int offset;
 
 HFONT hfFont;
 
@@ -46,9 +54,9 @@ typedef struct
 	COLORREF rgbCustomBackground[16];
 	BOOL isSBShown;
 	BOOL isSoundKeysEnabled;
-} test;
+} appInformation;
 
-test *t;
+appInformation *appInfo;
 
 BOOL CALLBACK SaveWarningDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -58,8 +66,12 @@ BOOL CALLBACK SaveWarningDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 		{
 			char text[50 + MAX_PATH];
 
-			wsprintf(text, "Вы хотите сохранить изменения в файле %s?", szOpenedFileName);
-			SetDlgItemText(hwnd, IDD_TEXT, text);
+			if (strlen(fileName) != 0)
+				wsprintf(text, "Вы хотите сохранить изменения в файле %s?", fileName);
+			else
+				wsprintf(text, "Вы хотите сохранить изменения в файле?", fileName);
+
+			SetDlgItemText(hwnd, IDD_SAVEWARNING_TEXT, text);
 
 			return TRUE;
 		}		
@@ -67,20 +79,20 @@ BOOL CALLBACK SaveWarningDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 		{
 			switch (LOWORD(wParam))
 			{
-				case IDD_SAVE:
-					EndDialog(hwnd, IDD_SAVE);
+				case IDD_SAVEWARNING_SAVE:
+					EndDialog(hwnd, IDD_SAVEWARNING_SAVE);
 					break;
-				case IDD_NOTSAVE:
-					EndDialog(hwnd, IDD_NOTSAVE);
+				case IDD_SAVEWARNING_NOTSAVE:
+					EndDialog(hwnd, IDD_SAVEWARNING_NOTSAVE);
 					break;
-				case IDD_CANCEL:
-					EndDialog(hwnd, IDD_CANCEL);
+				case IDD_SAVEWARNING_CANCEL:
+					EndDialog(hwnd, IDD_SAVEWARNING_CANCEL);
 					break;
 			}
 		}
 		break;
 		case WM_CLOSE:
-			EndDialog(hwnd, IDD_CANCEL);
+			EndDialog(hwnd, IDD_SAVEWARNING_CANCEL);
 		break;
 		default:
 			return FALSE;
@@ -103,6 +115,8 @@ LRESULT CALLBACK EditProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				wsprintf(text, "Строка %d, столбец %d", pos->Y, pos->X + 1);
 
 				SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
+
+				free(pos);
 			}
 		}
 		break;
@@ -126,6 +140,8 @@ LRESULT CALLBACK EditProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 						wsprintf(text, "Строка %d, столбец %d", pos->Y, pos->X + 1);
 
 						SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
+
+						free(pos);
 					}
 				}
 				break;
@@ -141,6 +157,7 @@ LRESULT CALLBACK EditProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			case 1: // CTRL + A
 			{
 				SendMessage(hwndEdit, EM_SETSEL, 0, -1);
+				SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
 
 				if (hwndSB != NULL)
 				{
@@ -151,6 +168,8 @@ LRESULT CALLBACK EditProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					wsprintf(text, "Строка %d, столбец %d", pos->Y, pos->X + 1);
 
 					SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
+
+					free(pos);
 				}
 
 				return 0;
@@ -189,20 +208,179 @@ LRESULT CALLBACK EditProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
+{	
+	if (msg == uFindReplaceMsg)
+	{		
+		// Получение указателя на структуру FINDREPLACE из lParam
+		LPFINDREPLACE lpfr = (LPFINDREPLACE)lParam;			
+		
+		// Сообщение закрытия 
+		if (lpfr->Flags & FR_DIALOGTERM)
+		{
+			lpfr->Flags ^= FR_DIALOGTERM;
+			offset = 0;
+
+			return 0;
+		}
+
+		// Cообщение на поиск
+		if (lpfr->Flags & FR_FINDNEXT)
+		{
+			int iSingleLength, length, startPos;
+			char *editText, *subStr;
+
+			if ((strlen(frBuff) != 0 && strcmp(frBuff, lpfr->lpstrFindWhat) != 0) || strlen(lpfr->lpstrReplaceWith) == 0)
+				offset = 0;
+
+			strcpy_s(frBuff, 80, lpfr->lpstrFindWhat);
+
+			iSingleLength = strlen(lpfr->lpstrFindWhat);
+
+			// Получение длины текста, по которому осуществляется поиск
+			length = GetWindowTextLength(hwndEdit);
+
+			editText = malloc((length + 1) * sizeof(char));
+			
+			GetWindowText(hwndEdit, editText, length + 1);
+
+			// Приравнивание регистров, если не установлена галочка "С учётом регистра"
+			if (!(lpfr->Flags & FR_MATCHCASE))
+			{
+				for (int i = 0; i < length; i++) 
+					editText[i] = tolower(editText[i]);				
+
+				for(int i = 0; i < iSingleLength; i++)
+					lpfr->lpstrFindWhat[i] = tolower(lpfr->lpstrFindWhat[i]);
+			}
+
+			// Функция _tcsstr, в случае обнаружения текста для поиска,
+			// возвращает текст из текста в котором осуществлялся поиск,
+			// который начинается с позиции найденного текста
+			subStr = _tcsstr(editText + offset, lpfr->lpstrFindWhat);
+			
+			free(editText);
+
+			// Если текст, по которому осуществляется поиск, не содержит строку поиска 
+			if (subStr == NULL)
+			{
+				char buff[140];
+								
+				offset = 0;
+
+				wsprintf(buff, "Не удалось найти \"%s\".", lpfr->lpstrFindWhat);
+				MessageBox(hwnd, buff, "Текстовый редактор", MB_OK | MB_ICONINFORMATION);
+
+				return FALSE;
+			}
+
+			// Получение позиций для выделения найденного текста
+			startPos = subStr - editText;
+			offset = startPos + strlen(lpfr->lpstrFindWhat);
+
+			// Выполнение активации главного окна, 
+			// выделение в элементе для управления найденного текста
+			SetActiveWindow(hwnd);
+
+			SendMessage(hwndEdit, EM_SETSEL, startPos, offset);
+			SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);	
+
+			if (hwndSB != NULL)
+			{
+				char text[50];
+				PCOORD pos = malloc(sizeof(PCOORD));
+
+				getCaretPos(hwndEdit, pos);
+				wsprintf(text, "Строка %d, столбец %d", pos->Y, pos->X + 1);
+
+				SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
+
+				free(pos);
+			}
+		}
+
+		// Cообщение на замену
+		if (lpfr->Flags & FR_REPLACE)
+		{
+			DWORD startSel, endSel;			
+
+			SendMessage(hwndEdit, EM_GETSEL, (WPARAM)&startSel, (LPARAM)&endSel);
+
+			//Если есть выделение
+			if (startSel != endSel)
+			{
+				char *editText, *selText;
+				int editTextLen;
+				
+				editTextLen = GetWindowTextLength(hwndEdit);
+				editText = malloc((editTextLen + 1) * sizeof(char));
+				GetWindowText(hwndEdit, editText, editTextLen + 1);
+
+				selText = calloc(endSel - startSel + 1, sizeof(char));
+
+				strncpy_s(selText, (endSel - startSel + 1) * sizeof(char), editText + startSel, endSel - startSel);
+
+				// Приравнивание регистров, если не установлена галочка "С учётом регистра"
+				if (!(lpfr->Flags & FR_MATCHCASE))
+				{
+					for (int i = 0; i < strlen(selText); i++)
+						selText[i] = tolower(selText[i]);
+
+					for (int i = 0; i < strlen(lpfr->lpstrFindWhat); i++)
+						lpfr->lpstrFindWhat[i] = tolower(lpfr->lpstrFindWhat[i]);
+				}
+
+				if (strcmp(selText, lpfr->lpstrFindWhat) == 0)
+					SendMessage(hwndEdit, EM_REPLACESEL, TRUE, lpfr->lpstrReplaceWith);								
+
+				free(editText);
+				free(selText);
+			}
+
+			lpfr->Flags ^= FR_REPLACE;
+			lpfr->Flags += FR_FINDNEXT;
+
+			SendMessage(hwnd, uFindReplaceMsg, 0, (LPARAM)lpfr);
+		}
+
+		// Cообщение на замену всего
+		if (lpfr->Flags & FR_REPLACEALL)
+		{
+			char *editText;
+			int editTextLen;
+
+			editTextLen = GetWindowTextLength(hwndEdit);
+			editText = malloc((editTextLen + 1) * sizeof(char));
+			GetWindowText(hwndEdit, editText, editTextLen + 1);
+
+			editText = strReplace(editText, lpfr->lpstrFindWhat, lpfr->lpstrReplaceWith, lpfr->Flags & FR_MATCHCASE);
+
+			SendMessage(hwndEdit, EM_SETSEL, 0, -1);
+			SendMessage(hwndEdit, EM_REPLACESEL, TRUE, editText);
+			SendMessage(hwndEdit, EM_SETSEL, 0, 0);
+			SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
+
+			if (hwndSB != NULL)
+				SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)"Строка 1, столбец 1");			
+
+			free(editText);
+		}
+
+		return 0;
+	}
+
 	switch (msg)
 	{
 		case WM_CREATE:
-		{		
+		{
 			hwndMenu = GetMenu(hwnd);
 
 			hwndTB = CreateWindowEx(0, TOOLBARCLASSNAME, NULL, WS_CHILD | WS_VISIBLE | TBSTYLE_TOOLTIPS | TBSTYLE_FLAT, 0, 0, 0, 0,
-									hwnd, (HMENU)IDC_TOOLBAR, GetModuleHandle(NULL), NULL);
+				hwnd, (HMENU)IDC_TOOLBAR, GetModuleHandle(NULL), NULL);
 
 			if (hwndTB == NULL)
 				MessageBox(hwnd, "Не удалось создать панель инструментов.", "Ошибка", MB_OK | MB_ICONERROR);
 
-			SendMessage(hwndTB, TB_BUTTONSTRUCTSIZE, (WPARAM)sizeof(TBBUTTON), 0);			
+			SendMessage(hwndTB, TB_BUTTONSTRUCTSIZE, (WPARAM)sizeof(TBBUTTON), 0);
 
 			tbAB.hInst = HINST_COMMCTRL;
 			tbAB.nID = IDB_STD_SMALL_COLOR;
@@ -244,7 +422,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			tbB[6].fsState = TBSTATE_ENABLED;
 			tbB[6].fsStyle = TBSTYLE_BUTTON;
 			tbB[6].idCommand = ID_EDIT_INSERT;
-			
+
 			tbB[7].iBitmap = STD_DELETE;
 			tbB[7].fsState = TBSTATE_ENABLED;
 			tbB[7].fsStyle = TBSTYLE_BUTTON;
@@ -258,37 +436,55 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			tbB[9].iBitmap = STD_REPLACE;
 			tbB[9].fsState = TBSTATE_ENABLED;
 			tbB[9].fsStyle = TBSTYLE_BUTTON;
-			tbB[9].idCommand = ID_EDIT_REPLACE;												
+			tbB[9].idCommand = ID_EDIT_REPLACE;
 
-			SendMessage(hwndTB, TB_ADDBUTTONS, sizeof(tbB) / sizeof(TBBUTTON), (LPARAM)&tbB);		
+			SendMessage(hwndTB, TB_ADDBUTTONS, sizeof(tbB) / sizeof(TBBUTTON), (LPARAM)&tbB);
 
 			hwndEdit = CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT", "",
-				WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_HSCROLL | WS_EX_ACCEPTFILES | ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL,
+				WS_CHILD | WS_VISIBLE | ES_NOHIDESEL | WS_VSCROLL | WS_HSCROLL | ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL,
 				0, 0, 100, 100, hwnd, (HMENU)IDC_EDIT, GetModuleHandle(NULL), NULL);
 
 			if (hwndEdit == NULL)
 				MessageBox(hwnd, "Не удалось создать окно редактирования.", "Ошибка", MB_OK | MB_ICONERROR);
-			
-			lpEditProc = (WNDPROC)SetWindowLongPtr(hwndEdit, GWL_WNDPROC, (LONG_PTR)&EditProc);				
 
-			t = malloc(sizeof(test));					
+			lpEditProc = (WNDPROC)SetWindowLongPtr(hwndEdit, GWL_WNDPROC, (LONG_PTR)&EditProc);
+
+			ZeroMemory(&fr, sizeof(FINDREPLACE));
+			fr.lStructSize = sizeof(FINDREPLACE);
+			fr.hwndOwner = hwnd;
+			fr.lpstrFindWhat = findWhat;
+			fr.wFindWhatLen = 80;
+			fr.lpstrReplaceWith = replaceWith;
+			fr.wReplaceWithLen = 80;
+			fr.Flags = FR_HIDEWHOLEWORD | FR_HIDEUPDOWN;
+			
+			uFindReplaceMsg = RegisterWindowMessage(FINDMSGSTRING);
+
+			appInfo = malloc(sizeof(appInformation));					
 
 			//Инициализация значениями по умолчанию
 			hfFont = GetStockObject(DEFAULT_GUI_FONT);
-			GetObject(hfFont, sizeof(LOGFONT), &t->lgFont);
+			GetObject(hfFont, sizeof(LOGFONT), &appInfo->lgFont);
 
-			t->rgbText = RGB(0, 0, 0);
-			t->rgbBackground = RGB(255, 255, 255);
-			t->isSBShown = FALSE;
-			t->isSoundKeysEnabled = FALSE;
+			appInfo->rgbText = RGB(0, 0, 0);
+			appInfo->rgbBackground = RGB(255, 255, 255);
+			appInfo->isSBShown = FALSE;
+			appInfo->isSoundKeysEnabled = FALSE;
+		
+			char currentDirectory[MAX_PATH];
+			char buff[MAX_PATH];
 
+			GetCurrentDirectory(MAX_PATH, currentDirectory);
+			wsprintf(buff, "%s\\%s", currentDirectory, appConfigFileName);		
+			strcpy_s(appConfigFileName, sizeof(buff), buff);
+			
 			errno_t err = fopen_s(&stream, appConfigFileName, "r");
 
 			if (!err)
 			{
-				if (fread(t, sizeof(test), 1, stream) == 1)
+				if (fread(appInfo, sizeof(appInformation), 1, stream) == 1)
 				{
-					hfFont = CreateFontIndirect(&t->lgFont);
+					hfFont = CreateFontIndirect(&appInfo->lgFont);
 
 					SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
 					InvalidateRect(hwnd, NULL, FALSE);
@@ -299,49 +495,33 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 			SendMessage(hwndEdit, WM_SETFONT, (WPARAM)hfFont, MAKELPARAM(FALSE, 0));			
 
-			if (t->isSBShown)
+			if (appInfo->isSBShown)
 				SendMessage(hwnd, WM_COMMAND, ID_VIEW_STATUSBAR, NULL);
-			if (t->isSoundKeysEnabled)
-				SendMessage(hwnd, WM_COMMAND, ID_SOUND_KEYS, NULL);
-
-			/*if (openFile(hwnd, &stream, appConfigFileName, "r"))
-			{
-				if (fread(t, sizeof(test), 1, stream) != 1)
-				{
-					hfFont = GetStockObject(DEFAULT_GUI_FONT);
-					GetObject(hfFont, sizeof(LOGFONT), &t->lgFont);
-
-					t->rgbText = RGB(0, 0, 0);
-					t->rgbBackground = RGB(255, 255, 255);
-				}
-				else
-				{
-					hfFont = CreateFontIndirect(&t->lgFont);
-									
-					SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
-					InvalidateRect(hwnd, NULL, FALSE);
-				}
-
-				SendMessage(hwndEdit, WM_SETFONT, (WPARAM)hfFont, MAKELPARAM(FALSE, 0));
-				fclose(stream);
-			}*/
+			if (appInfo->isSoundKeysEnabled)
+				SendMessage(hwnd, WM_COMMAND, ID_SOUND_KEYS, NULL);			
 
 			DelCBorders(hwnd);
 			DelCBorders(hwndEdit);
-			ofn = InitOFN(hwnd, szOpenedFileName);
-			sfn = InitSFN(hwnd, szSavedFileName);
-
-			SetFocus(hwndEdit);					
+			ofn = InitOFN(hwnd, fileName);
+			sfn = InitSFN(hwnd, fileName);				
 		}
 		break;		
+		case WM_ACTIVATE:
+		{
+			if (LOWORD(wParam) == WA_ACTIVE || LOWORD(wParam) == WA_CLICKACTIVE)
+			{
+				SetFocus(hwndEdit);
+			}
+		}
+		break;
 		case WM_CTLCOLOREDIT:
 		{
 			HDC hdc = (HDC)wParam;
-			SetTextColor(hdc, t->rgbText);
-			SetBkColor(hdc, t->rgbBackground);	
-			return (INT_PTR)CreateSolidBrush(t->rgbBackground);
+			SetTextColor(hdc, appInfo->rgbText);
+			SetBkColor(hdc, appInfo->rgbBackground);	
+			return (INT_PTR)CreateSolidBrush(appInfo->rgbBackground);
 		}
-		break;
+		break;		
 		case WM_COMMAND:
 		{			
 			switch (LOWORD(wParam))
@@ -359,6 +539,26 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 							wsprintf(text, "Строка %d, столбец %d", pos->Y, pos->X + 1);
 
 							SendMessage(hwndSB, SB_SETTEXT, 0, (LPARAM)text);
+
+							free(pos);
+						}
+
+						if (isFileSaved)
+						{
+							if (strlen(fileName) == 0)
+							{
+								windowText = (char*)calloc(strlen("Безымянный* – Текстовый редактор") + 1, sizeof(char));
+								wsprintf(windowText, "Безымянный* – Текстовый редактор", fileName);
+							}
+							else
+							{
+								windowText = (char*)calloc(strlen(fileName) + strlen("* – Текстовый редактор") + 1, sizeof(char));
+								wsprintf(windowText, "%s* – Текстовый редактор", fileName);
+							}
+
+							SetWindowText(hwnd, windowText);
+
+							free(windowText);
 						}
 
 						isFileSaved = FALSE;
@@ -374,63 +574,68 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				break;
 				case ID_FILE_NEW:
 				{
-					isFileSaved = FALSE;
-					DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_SAVEWARNING), hwnd, SaveWarningDlgProc);
+					if (getSaveWarningDialogResult(hwnd, hwndEdit, SaveWarningDlgProc, isFileSaved))
+					{
+						SetWindowText(hwnd, "Безымянный – Текстовый редактор");
+						SetDlgItemText(hwnd, IDC_EDIT, "");
 
-					SetWindowText(hwnd, "Безымянный – Текстовый редактор");
-					SetDlgItemText(hwnd, IDC_EDIT, "");
+						wsprintf(fileName, "", fileName);
+						isFileSaved = TRUE;
+					}
 				}
 				break;
 				case ID_FILE_OPEN:
 				{
-					if (GetOpenFileName(&ofn)) //Действие, после выбора в диалоговом окне файла для открытия
-					{
-						char *fileText;
-						char paragraph[512];						
-
-						windowText = (char*)calloc(strlen(szOpenedFileName) + strlen(" – Текстовый редактор") + 1, sizeof(char));
-						wsprintf(windowText, "%s – Текстовый редактор", szOpenedFileName);
-
-						SetWindowText(hwnd, windowText);
-
-						free(windowText);
-
-						if (openFile(hwnd, &stream, szOpenedFileName, "r"))
+					if (getSaveWarningDialogResult(hwnd, hwndEdit, SaveWarningDlgProc, isFileSaved))
+					{					
+						if (GetOpenFileName(&ofn)) //Действие, после выбора в диалоговом окне файла для открытия
 						{
-							for (unsigned i = 0; fgets(paragraph, 512, stream) != NULL; i++)
+							char *fileText;
+							char paragraph[512];
+
+							windowText = (char*)calloc(strlen(fileName) + strlen(" – Текстовый редактор") + 1, sizeof(char));
+							wsprintf(windowText, "%s – Текстовый редактор", fileName);
+
+							SetWindowText(hwnd, windowText);
+
+							free(windowText);
+
+							if (openFile(hwnd, &stream, fileName, "r"))
 							{
-								if (i == 0)
+								for (unsigned i = 0; fgets(paragraph, 512, stream) != NULL; i++)
 								{
-									// Выделение памяти на 3 байт больше, так как необходимо хранить терминальный символ
-									// и добавленные символы "\r"
-									fileText = (char*)calloc(strlen(paragraph) + 3, sizeof(char));
-									strcpy_s(fileText, strlen(paragraph) + 1, paragraph);
-									append(fileText, "\r", strlen(fileText) - 1);
+									if (i == 0)
+									{
+										// Выделение памяти на 2 байт больше, так как необходимо хранить 
+										// терминальный символ и добавленный символ "\r"
+										fileText = (char*)calloc(strlen(paragraph) + 2, sizeof(char));
+										strcpy_s(fileText, strlen(paragraph) + 1, paragraph);
+										append(fileText, "\r", strlen(fileText));
+									}
+									else
+									{
+										// Выделение памяти на 2 байта больше, так как необходимо хранить
+										// терминальный символ и добавленный символ "\r"
+										fileText = (char*)realloc(fileText, strlen(fileText) + strlen(paragraph) + 2);
+										append(paragraph, "\r", strlen(paragraph) + 1);
+										append(fileText, paragraph, strlen(fileText));
+									}
 								}
-								else
-								{
-									// Выделение памяти на 4 байта больше, так как необходимо хранить
-									// терминальные символы 2-х строк и добавленные символы "\r"
-									fileText = (char*)realloc(fileText, strlen(fileText) + strlen(paragraph) + 4);
-									append(paragraph, "\r", strlen(paragraph) - 1);
-									append(fileText, paragraph, strlen(fileText));
-								}
+
+								SetDlgItemText(hwnd, IDC_EDIT, fileText);
+
+								isFileSaved = TRUE;
+
+								free(fileText);
+								fclose(stream);								
 							}
-
-							SetDlgItemText(hwnd, IDC_EDIT, fileText);
-							SetFocus(hwndEdit);
-
-							isFileSaved = TRUE;
-
-							free(fileText);
-							fclose(stream);
 						}
 					}
 				}
 				break;
 				case ID_FILE_SAVE:
 				{
-					if (strlen(szOpenedFileName) != 0)
+					if (strlen(fileName) != 0)
 					{
 						DWORD dwTextLength;
 
@@ -438,7 +643,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 						//Если есть, что сохранять
 						if (dwTextLength > 0)
 						{
-							if (openFile(hwnd, &stream, szOpenedFileName, "w"))
+							if (openFile(hwnd, &stream, fileName, "w"))
 							{
 								char *editText;
 
@@ -446,10 +651,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 								GetDlgItemText(hwnd, IDC_EDIT, editText, dwTextLength + 1);
 								fwrite(editText, 1, strlen(editText), stream);
 
-								isFileSaved = TRUE;
-
 								free(editText);
 								fclose(stream);
+
+								isFileSaved = TRUE;
+								windowText = (char*)calloc(strlen(fileName) + strlen(" – Текстовый редактор") + 1, sizeof(char));
+								wsprintf(windowText, "%s – Текстовый редактор", fileName);									
+
+								SetWindowText(hwnd, windowText);
+
+								free(windowText);								
 							}
 						}
 					}
@@ -469,7 +680,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 						//Если есть, что сохранять
 						if (dwTextLength > 0)
 						{
-							if (openFile(hwnd, &stream, szSavedFileName, "w"))
+							if (openFile(hwnd, &stream, fileName, "w"))
 							{
 								char *editText;
 
@@ -477,15 +688,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 								GetDlgItemText(hwnd, IDC_EDIT, editText, dwTextLength + 1);
 								fwrite(editText, 1, strlen(editText), stream);
 
+								free(editText);
+								fclose(stream);
+
 								isFileSaved = TRUE;
-								windowText = (char*)calloc(strlen(szSavedFileName) + strlen(" – Текстовый редактор") + 1, sizeof(char));
-								wsprintf(windowText, "%s – Текстовый редактор", szSavedFileName);
+								windowText = (char*)calloc(strlen(fileName) + strlen(" – Текстовый редактор") + 1, sizeof(char));
+								wsprintf(windowText, "%s – Текстовый редактор", fileName);
 
 								SetWindowText(hwnd, windowText);
 
 								free(windowText);
-								free(editText);
-								fclose(stream);
 							}
 						}
 					}
@@ -521,12 +733,64 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					SendMessage(hwndEdit, EM_SETSEL, 0, -1);
 				}
 				break;
+				case ID_EDIT_LOWERREGISTER:
+				{					
+					char *editText;
+					int caretPos, editTextLen;
+				
+					SendMessage(hwndEdit, EM_GETSEL, &caretPos, 0);
+
+					editTextLen = GetWindowTextLength(hwndEdit);
+
+					editText = (char*)calloc(editTextLen + 1, 1);
+					GetDlgItemText(hwnd, IDC_EDIT, editText, editTextLen + 1);					
+
+					for (int i = 0; i < editTextLen; i++)
+						editText[i] = tolower(editText[i]);
+
+					SendMessage(hwndEdit, EM_SETSEL, 0, -1);
+					SendMessage(hwndEdit, EM_REPLACESEL, TRUE, editText);
+					SendMessage(hwndEdit, EM_SETSEL, caretPos, caretPos);
+					SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
+
+					free(editText);					
+				}
+				break;
+				case ID_EDIT_UPPERREGISTER:
+				{
+					char *editText;
+					int caretPos, editTextLen;
+
+					SendMessage(hwndEdit, EM_GETSEL, &caretPos, 0);
+
+					editTextLen = GetWindowTextLength(hwndEdit);
+
+					editText = (char*)calloc(editTextLen + 1, 1);
+					GetDlgItemText(hwnd, IDC_EDIT, editText, editTextLen + 1);
+
+					for (int i = 0; i < editTextLen; i++)
+						editText[i] = toupper(editText[i]);
+
+					SendMessage(hwndEdit, EM_SETSEL, 0, -1);
+					SendMessage(hwndEdit, EM_REPLACESEL, TRUE, editText);
+					SendMessage(hwndEdit, EM_SETSEL, caretPos, caretPos);
+					SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
+
+					free(editText);
+				}
+				break;
 				case ID_EDIT_FIND:
 				{
+					DestroyWindow(hwndR);
+					hwndR = NULL;
+					hwndF = FindText(&fr);
 				}
 				break;
 				case ID_EDIT_REPLACE:
 				{
+					DestroyWindow(hwndF);
+					hwndF = NULL;
+					hwndR = ReplaceText(&fr);
 				}
 				break;
 				case ID_FORMAT_FONT:
@@ -535,20 +799,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 					cf.Flags = CF_EFFECTS | CF_INITTOLOGFONTSTRUCT | CF_SCREENFONTS;
 					cf.hwndOwner = hwnd;
-					cf.lpLogFont = &t->lgFont;
-					cf.rgbColors = t->rgbText;				
+					cf.lpLogFont = &appInfo->lgFont;
+					cf.rgbColors = appInfo->rgbText;				
 
 					if (ChooseFont(&cf))
 					{
-						hfFont = CreateFontIndirect(&t->lgFont);
+						hfFont = CreateFontIndirect(&appInfo->lgFont);
 
 						if (hfFont)
 							SendMessage(hwndEdit, WM_SETFONT, (WPARAM)hfFont, MAKELPARAM(TRUE, 0));
 						else						
 							MessageBox(hwnd, "Не удалось применить выбранный шрифт.", "Ошибка", MB_OK | MB_ICONEXCLAMATION);
-												
-		
-						t->rgbText = cf.rgbColors;
+														
+						appInfo->rgbText = cf.rgbColors;
 						SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
 					}
 				}
@@ -559,15 +822,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 					cc.Flags = CC_RGBINIT | CC_FULLOPEN | CC_ANYCOLOR;
 					cc.hwndOwner = hwnd;
-					cc.rgbResult = t->rgbBackground;
-					cc.lpCustColors = t->rgbCustomBackground;
+					cc.rgbResult = appInfo->rgbBackground;
+					cc.lpCustColors = appInfo->rgbCustomBackground;
 
 					if (ChooseColor(&cc))
 					{
-						t->rgbBackground = cc.rgbResult;
+						appInfo->rgbBackground = cc.rgbResult;
 						SendMessage(hwnd, WM_CTLCOLOREDIT, GetDC(hwndEdit), hwndEdit);
-						InvalidateRect(hwnd, NULL, FALSE);
-						SetFocus(hwndEdit);
 					}
 				}
 				break;
@@ -581,7 +842,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 					if (mii.fState == MFS_CHECKED)
 					{
-						t->isSBShown = TRUE;
+						appInfo->isSBShown = TRUE;
 
 						hwndSB = CreateWindowEx(0, STATUSCLASSNAME, NULL, WS_CHILD | WS_VISIBLE | SBARS_SIZEGRIP, 0, 0, 0, 0,
 												hwnd, (HMENU)IDC_STATUSBAR, GetModuleHandle(NULL), NULL);
@@ -598,7 +859,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					}
 					else
 					{
-						t->isSBShown = FALSE;
+						appInfo->isSBShown = FALSE;
 
 						DestroyWindow(hwndSB);
 						hwndSB = NULL;
@@ -615,9 +876,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					SetMenuItemInfo(hwndMenu, ID_SOUND_KEYS, FALSE, &mii);	
 
 					if (mii.fState == MFS_CHECKED)
-						t->isSoundKeysEnabled = TRUE;
+						appInfo->isSoundKeysEnabled = TRUE;
 					else
-						t->isSoundKeysEnabled = FALSE;
+						appInfo->isSoundKeysEnabled = FALSE;
 				}
 				break;
 			}
@@ -653,16 +914,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		break;
 		case WM_CLOSE:
 		{		
-			if (openFile(hwnd, &stream, appConfigFileName, "w"))
-			{
-				fwrite(t, sizeof(test), 1, stream);
+			if (getSaveWarningDialogResult(hwnd, hwndEdit, SaveWarningDlgProc, isFileSaved))
+			{					
+				if (openFile(hwnd, &stream, appConfigFileName, "w"))
+				{
+					fwrite(appInfo, sizeof(appInformation), 1, stream);
 
-				fclose(stream);
+					fclose(stream);
+				}			
+
+				free(appInfo);
+
+				DestroyWindow(hwnd);
 			}
-
-			free(t);
-
-			DestroyWindow(hwnd);			
 		}
 		break;
 		case WM_DESTROY:

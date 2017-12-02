@@ -1,0 +1,3229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>72</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>6271</DEFECTCODE>
+    <DESCRIPTION>В "wsprintfA" передан лишний аргумент:  _Param_(3) не используется строкой формата.</DESCRIPTION>
+    <FUNCTION>SaveWarningDlgProc</FUNCTION>
+    <DECORATED>SaveWarningDlgProc@16</DECORATED>
+    <FUNCLINE>61</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>115</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>Разыменование пустого указателя "pos". </DESCRIPTION>
+    <FUNCTION>EditProc</FUNCTION>
+    <DECORATED>EditProc@16</DECORATED>
+    <FUNCLINE>103</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>105</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>107</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>109</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>111</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>112</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"pos" может быть равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>114</LINE>
+        <COLUMN>15</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"pos" является аргументом ввода-вывода для "getCaretPos" (объявлено в f:\оаип\курсовой проект\texteditor\texteditor\view.h: 13)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>115</LINE>
+        <COLUMN>12</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"pos" разыменовано, но, возможно, по-прежнему равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>546</LINE>
+      <COLUMN>35</COLUMN>
+    </SFA>
+    <DEFECTCODE>6308</DEFECTCODE>
+    <DESCRIPTION>realloc может возвратить пустой указатель: присвоение пустого указателя переменной "fileText", которая передается в качестве аргумента функции realloc, приведет к утечке исходного блока памяти.</DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>478</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>6271</DEFECTCODE>
+    <DESCRIPTION>В "wsprintfA" передан лишний аргумент:  _Param_(3) не используется строкой формата.</DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>509</LINE>
+      <COLUMN>14</COLUMN>
+    </SFA>
+    <DEFECTCODE>6271</DEFECTCODE>
+    <DESCRIPTION>В "wsprintfA" передан лишний аргумент:  _Param_(3) не используется строкой формата.</DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>256</LINE>
+      <COLUMN>19</COLUMN>
+    </SFA>
+    <DEFECTCODE>28278</DEFECTCODE>
+    <DESCRIPTION>Функция _tcsstr появляется без прототипов в области.  Возможен только ограниченный анализ. Включите соответствующий заголовок или добавьте прототип. Данное предупреждение также возникает, если в определении функции пропущены типы параметров или возвращаемых значений.</DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>402</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>6011</DEFECTCODE>
+    <DESCRIPTION>Разыменование пустого указателя "appInfo". </DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>306</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>308</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>310</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>312</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>315</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>318</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>320</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>321</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>323</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>326</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>329</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>332</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>333</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>334</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>336</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>337</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>338</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>339</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>341</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>342</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>343</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>344</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>346</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>347</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>348</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>349</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>351</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>352</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>353</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>354</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>356</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>357</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>358</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>359</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>361</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>362</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>363</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>364</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>366</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>367</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>368</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>369</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>371</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>372</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>373</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>374</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>376</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>378</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>382</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>385</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>387</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>388</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>389</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>390</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>391</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>392</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>393</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>394</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>396</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>398</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"appInfo" может быть равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>401</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>402</LINE>
+        <COLUMN>12</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"appInfo" разыменовано, но, возможно, по-прежнему равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>420</LINE>
+      <COLUMN>58</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"stream" может быть равен "0":  это не соответствует спецификации функции "fread". </DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>306</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>308</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>310</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>312</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>315</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>318</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>320</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>321</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>323</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>326</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>329</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>332</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>333</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>334</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>336</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>337</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>338</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>339</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>341</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>342</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>343</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>344</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>346</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>347</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>348</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>349</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>351</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>352</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>353</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>354</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>356</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>357</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>358</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>359</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>361</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>362</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>363</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>364</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>366</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>367</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>368</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>369</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>371</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>372</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>373</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>374</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>376</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>378</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>382</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>385</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>387</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>388</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>389</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>390</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>391</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>392</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>393</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>394</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>396</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>398</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>401</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>402</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>404</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>405</LINE>
+        <COLUMN>26</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>406</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>407</LINE>
+        <COLUMN>31</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>409</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>410</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>412</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>413</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>414</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>416</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"stream" может быть равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>418</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Войти в эту ветвь (предполагается "!err")</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>420</LINE>
+        <COLUMN>58</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"stream" является аргументом ввода-вывода для "fread" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h: 231)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>420</LINE>
+        <COLUMN>58</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Пропустить эту ветвь (предполагается, что "&lt;условие ветви&gt;" равно false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>420</LINE>
+        <COLUMN>58</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"stream" не должно равняться NULL, поскольку это не соответствует SAL-аннотации для "fread"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>420</LINE>
+      <COLUMN>58</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"appInfo" может быть равен "0":  это не соответствует спецификации функции "fread". Самое раннее расположение, где это могло произойти, см. в строке 402</DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>306</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>308</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>310</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>312</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>315</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>318</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>320</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>321</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>323</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>326</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>329</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>332</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>333</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>334</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>336</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>337</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>338</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>339</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>341</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>342</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>343</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>344</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>346</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>347</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>348</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>349</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>351</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>352</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>353</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>354</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>356</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>357</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>358</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>359</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>361</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>362</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>363</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>364</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>366</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>367</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>368</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>369</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>371</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>372</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>373</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>374</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>376</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>378</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>382</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>385</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>387</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>388</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>389</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>390</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>391</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>392</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>393</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>394</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>396</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>398</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"appInfo" может быть равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>401</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>402</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>404</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>405</LINE>
+        <COLUMN>26</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>406</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>407</LINE>
+        <COLUMN>31</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>409</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>410</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>412</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>413</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>414</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>416</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>418</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Войти в эту ветвь (предполагается "!err")</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>420</LINE>
+        <COLUMN>58</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"appInfo" является аргументом ввода-вывода для "fread" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h: 231)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>420</LINE>
+        <COLUMN>58</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Пропустить эту ветвь (предполагается, что "&lt;условие ветви&gt;" равно false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>420</LINE>
+        <COLUMN>58</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"appInfo" не должно равняться NULL, поскольку это не соответствует SAL-аннотации для "fread"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>428</LINE>
+      <COLUMN>10</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"stream" может быть равен "0":  это не соответствует спецификации функции "fclose". Самое раннее расположение, где это могло произойти, см. в строке 420</DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>306</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>308</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>310</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>312</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>315</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>318</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>320</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>321</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>323</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>326</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>329</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>332</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>333</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>334</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>336</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>337</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>338</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>339</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>341</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>342</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>343</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>344</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>346</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>347</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>348</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>349</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>351</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>352</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>353</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>354</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>356</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>357</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>358</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>359</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>361</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>362</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>363</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>364</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>366</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>367</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>368</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>369</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>371</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>372</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>373</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>374</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>376</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>378</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>382</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>385</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>387</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>388</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>389</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>390</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>391</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>392</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>393</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>394</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>396</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>398</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>401</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>402</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>404</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>405</LINE>
+        <COLUMN>26</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>406</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>407</LINE>
+        <COLUMN>31</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>409</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>410</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>412</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>413</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>414</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>416</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"stream" может быть равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>418</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Войти в эту ветвь (предполагается "!err")</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>420</LINE>
+        <COLUMN>58</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"stream" является аргументом ввода-вывода для "fread" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h: 231)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>420</LINE>
+        <COLUMN>58</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Пропустить эту ветвь (предполагается, что "&lt;условие ветви&gt;" равно false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>428</LINE>
+        <COLUMN>10</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"stream" является входными данными для "fclose" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h:144)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>428</LINE>
+        <COLUMN>10</COLUMN>
+        <KEYEVENT>
+          <ID>6</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"stream" не должно равняться NULL, поскольку это не соответствует SAL-аннотации для "fclose"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>431</LINE>
+      <COLUMN>14</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"hwndEdit" может быть равен "0":  это не соответствует спецификации функции "SendMessageA". Самое раннее расположение, где это могло произойти, см. в строке 385</DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>306</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>308</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>310</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>312</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>315</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>318</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>320</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>321</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>323</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>326</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>329</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>332</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>333</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>334</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>336</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>337</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>338</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>339</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>341</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>342</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>343</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>344</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>346</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>347</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>348</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>349</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>351</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>352</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>353</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>354</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>356</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>357</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>358</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>359</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>361</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>362</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>363</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>364</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>366</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>367</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>368</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>369</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>371</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>372</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>373</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>374</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>376</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>378</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>382</LINE>
+        <COLUMN>16</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"hwndEdit" может быть равно NULL (Войти в эту ветвь)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>383</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>385</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"hwndEdit" является входными данными для "SetWindowLongA" (объявлено в c:\program files (x86)\windows kits\8.1\include\um\winuser.h:9301)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>387</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>388</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>389</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>390</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>391</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>392</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>393</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>394</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>396</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>398</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>401</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>402</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>404</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>405</LINE>
+        <COLUMN>26</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>406</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>407</LINE>
+        <COLUMN>31</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>409</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>410</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>412</LINE>
+        <COLUMN>22</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>413</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>414</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>416</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>418</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Пропустить эту ветвь (предполагается, что "!err" равно false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>431</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"hwndEdit" является входными данными для "SendMessageA" (объявлено в c:\program files (x86)\windows kits\8.1\include\um\winuser.h:3551)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>431</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"hwndEdit" не должно равняться NULL, поскольку это не соответствует SAL-аннотации для "SendMessageA"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>318</LINE>
+      <COLUMN>14</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"hwndTB" может быть равен "0":  это не соответствует спецификации функции "SendMessageA". </DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>306</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>308</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>310</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>312</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>315</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"hwndTB" может быть равно NULL (Войти в эту ветвь)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>316</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>318</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"hwndTB" является входными данными для "SendMessageA" (объявлено в c:\program files (x86)\windows kits\8.1\include\um\winuser.h:3551)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>318</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"hwndTB" не должно равняться NULL, поскольку это не соответствует SAL-аннотации для "SendMessageA"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>385</LINE>
+      <COLUMN>14</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"hwndEdit" может быть равен "0":  это не соответствует спецификации функции "SetWindowLongA". </DESCRIPTION>
+    <FUNCTION>WndProc</FUNCTION>
+    <DECORATED>WndProc@16</DECORATED>
+    <FUNCLINE>204</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>306</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>308</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>310</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>312</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>315</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>318</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>320</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>321</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>323</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>324</LINE>
+        <COLUMN>3</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>326</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>327</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>328</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>329</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>331</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>332</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>333</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>334</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>336</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>337</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>338</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>339</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>341</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>342</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>343</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>344</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>346</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>347</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>348</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>349</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>351</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>352</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>353</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>354</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>356</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>357</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>358</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>359</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>361</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>362</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>363</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>364</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>366</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>367</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>368</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>369</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>371</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>372</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>373</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>374</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>376</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>378</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>382</LINE>
+        <COLUMN>16</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>ветвь</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"hwndEdit" может быть равно NULL (Войти в эту ветвь)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>383</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>385</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"hwndEdit" является входными данными для "SetWindowLongA" (объявлено в c:\program files (x86)\windows kits\8.1\include\um\winuser.h:9301)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>main.c</FILENAME>
+        <LINE>385</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"hwndEdit" не должно равняться NULL, поскольку это не соответствует SAL-аннотации для "SetWindowLongA"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>main.c</FILENAME>
+      <LINE>826</LINE>
+      <COLUMN>11</COLUMN>
+    </SFA>
+    <DEFECTCODE>28251</DEFECTCODE>
+    <DESCRIPTION>Несогласованная аннотация для "WinMain": данный экземпляр содержит нет аннотаций. См. c:\program files (x86)\windows kits\8.1\include\um\winbase.h(905). </DESCRIPTION>
+    <FUNCTION>WinMain</FUNCTION>
+    <DECORATED>WinMain@16</DECORATED>
+    <FUNCLINE>826</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

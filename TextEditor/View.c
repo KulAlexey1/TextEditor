@@ -1,10 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <windowsx.h>
-#include <Richedit.h>
+#include "resource.h"
 #include <stdio.h>
 #include <share.h>
 #include "View.h"
+
 
 void DelCBorders(HWND hwnd)
 {
@@ -49,7 +50,7 @@ OPENFILENAME InitSFN(HWND hwnd, char *szSavedFileName)
 
 BOOLEAN openFile(HWND hwnd, FILE *stream, const char *szOpenedFileName, const char *mode)
 {
-	errno_t err = fopen_s((FILE**)stream, szOpenedFileName, mode);
+	errno_t err = fopen_s(stream, szOpenedFileName, mode);
 
 	if (err)
 	{
@@ -75,6 +76,8 @@ void append(char *subject, const char *insert, int pos) {
 	strcpy(buf + len, subject + pos); // Копируем в конец buf оставшиеся в subject символы
 
 	strcpy(subject, buf); // Копируем из buf в subject 
+
+	free(buf);
 }
 
 void getCaretPos(HWND hwndEdit, PCOORD pos)
@@ -90,4 +93,125 @@ void getCaretPos(HWND hwndEdit, PCOORD pos)
 
 	firstCharacter = SendMessage(hwndEdit, EM_LINEINDEX, (WPARAM)-1, 0);
 	pos->X = endSel - firstCharacter;
+}
+
+BOOL getSaveWarningDialogResult(HWND hwnd, HWND hwndEdit, _In_opt_ DLGPROC lpDialogFunc, BOOL isFileSaved)
+{
+	BOOL flag = FALSE;
+
+	if (isFileSaved == FALSE)
+	{
+		int res = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_SAVEWARNING), hwnd, lpDialogFunc);
+
+		switch (res)
+		{
+			case IDD_SAVEWARNING_SAVE:
+			{
+				SendMessage(hwnd, WM_COMMAND, ID_FILE_SAVE, NULL);
+				flag = FALSE;				
+			}
+			break;
+			case IDD_SAVEWARNING_NOTSAVE:
+			{
+				flag = TRUE;
+			}
+			break;
+			case IDD_SAVEWARNING_CANCEL:
+			{
+				flag = FALSE;
+			}
+			break;
+		}
+	}
+	else
+	{
+		flag = TRUE;
+	}
+
+	return flag;
+}
+
+char* stristr(const char *haystack, const char *needle) {
+	int c = tolower((unsigned char)*needle);
+
+	if (c == '\0')
+		return (char *)haystack;
+
+	for (; *haystack; haystack++) 
+	{
+		if (tolower((unsigned char)*haystack) == c) 
+		{
+			for (unsigned int i = 1; ; i++) 
+			{
+				if (needle[i] == '\0')
+					return (char *)haystack;
+
+				if (tolower((unsigned char)haystack[i]) != tolower((unsigned char)needle[i]))
+					break;
+			}
+		}
+	}
+
+	return NULL;
+}
+
+char* strReplace(char *text, char *search, char *replace, BOOL withCaseSensitive) {
+	char *buffer = NULL;
+	char *p = text;
+	int len;	
+
+	if (!withCaseSensitive)
+	{		
+		while ((p = stristr(p, search)))
+		{
+			len = strlen(text) - strlen(p) + 1 + strlen(replace) + strlen((p + strlen(search)));
+
+			if (buffer != NULL)
+				buffer = realloc(buffer, len * sizeof(char));
+			else
+				buffer = calloc(len, sizeof(char));
+
+			strncpy(buffer, text, strlen(text) - strlen(p));
+			buffer[strlen(text) - strlen(p)] = '\0';
+			strcat(buffer, replace);
+			strcat(buffer, p + strlen(search));
+
+			if (strlen(buffer) > strlen(text))
+				text = realloc(text, len * sizeof(char));
+
+			strcpy(text, buffer);
+
+			if (strlen(replace) != 0)
+				p++;
+		}
+	}
+	else
+	{
+		while ((p = strstr(p, search)))
+		{
+			len = strlen(text) - strlen(p) + 1 + strlen(replace) + strlen((p + strlen(search)));
+
+			if (buffer != NULL)
+				buffer = realloc(buffer, len * sizeof(char));
+			else
+				buffer = calloc(len, sizeof(char));
+
+			strncpy(buffer, text, strlen(text) - strlen(p));
+			buffer[strlen(text) - strlen(p)] = '\0';
+			strcat(buffer, replace);
+			strcat(buffer, p + strlen(search));
+
+			if (strlen(buffer) > strlen(text))
+				text = realloc(text, len * sizeof(char));
+
+			strcpy(text, buffer);
+
+			if (strlen(replace) != 0)
+				p++;
+		}
+	}
+
+	free(buffer);
+
+	return text;
 }

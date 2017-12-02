@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>view.c</FILENAME>
+      <LINE>72</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"buf" может быть равен "0":  это не соответствует спецификации функции "strncpy". </DESCRIPTION>
+    <FUNCTION>append</FUNCTION>
+    <DECORATED>append</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>69</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"buf" может быть равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>70</LINE>
+        <COLUMN>5</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>72</LINE>
+        <COLUMN>8</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"buf" является аргументом ввода-вывода для "strncpy" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h: 346)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>72</LINE>
+        <COLUMN>8</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"buf" не должно равняться NULL, поскольку это не соответствует SAL-аннотации для "strncpy"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>view.c</FILENAME>
+      <LINE>73</LINE>
+      <COLUMN>5</COLUMN>
+    </SFA>
+    <DEFECTCODE>6053</DEFECTCODE>
+    <DESCRIPTION>Предыдущий вызов "strncpy" может привести к тому, что строка "buf" не будет завершаться нулем.</DESCRIPTION>
+    <FUNCTION>append</FUNCTION>
+    <DECORATED>append</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>1</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>69</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>70</LINE>
+        <COLUMN>5</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>72</LINE>
+        <COLUMN>8</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"buf" является выводом из "strncpy", который может не обеспечивать его завершение нулем</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>73</LINE>
+        <COLUMN>5</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"buf" является входными данными для "strlen" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h:215)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>73</LINE>
+        <COLUMN>5</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"buf" должно завершаться нулем в соответствии с SAL-аннотацией для "strlen"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>view.c</FILENAME>
+      <LINE>73</LINE>
+      <COLUMN>5</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"buf" может быть равен "0":  это не соответствует спецификации функции "strlen". Самое раннее расположение, где это могло произойти, см. в строке 72</DESCRIPTION>
+    <FUNCTION>append</FUNCTION>
+    <DECORATED>append</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>69</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"buf" может быть равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>70</LINE>
+        <COLUMN>5</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>72</LINE>
+        <COLUMN>8</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"buf" является аргументом ввода-вывода для "strncpy" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h: 346)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>73</LINE>
+        <COLUMN>5</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"buf" является входными данными для "strlen" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h:215)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>73</LINE>
+        <COLUMN>5</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"buf" не должно равняться NULL, поскольку это не соответствует SAL-аннотации для "strlen"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>view.c</FILENAME>
+      <LINE>78</LINE>
+      <COLUMN>7</COLUMN>
+    </SFA>
+    <DEFECTCODE>6387</DEFECTCODE>
+    <DESCRIPTION>"buf" может быть равен "0":  это не соответствует спецификации функции "strcpy". Самое раннее расположение, где это могло произойти, см. в строке 72</DESCRIPTION>
+    <FUNCTION>append</FUNCTION>
+    <DECORATED>append</DECORATED>
+    <FUNCLINE>67</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>69</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"buf" может быть равно NULL</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>70</LINE>
+        <COLUMN>5</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>72</LINE>
+        <COLUMN>8</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"buf" является аргументом ввода-вывода для "strncpy" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h: 346)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>73</LINE>
+        <COLUMN>5</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"buf" является входными данными для "strlen" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h:215)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>74</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"buf" является аргументом ввода-вывода для "strcpy" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h: 119)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>75</LINE>
+        <COLUMN>5</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>76</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>объявление</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"buf" является аргументом ввода-вывода для "strcpy" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h: 119)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>78</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>6</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"buf" является входными данными для "strcpy" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h:119)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+        <FILENAME>view.c</FILENAME>
+        <LINE>78</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>7</ID>
+          <KIND>использование</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"buf" не должно равняться NULL, поскольку это не соответствует SAL-аннотации для "strcpy"</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>view.c</FILENAME>
+      <LINE>96</LINE>
+      <COLUMN>5</COLUMN>
+    </SFA>
+    <DEFECTCODE>28252</DEFECTCODE>
+    <DESCRIPTION>Несогласованная аннотация для "getSaveWarningDialogResult": _Param_(2) содержит "SAL_pre SAL_notref SAL_null(__maybe) SAL_pre SAL_valid SAL_pre SAL_notref SAL_deref SAL_notref SAL_access(0x1)" в предыдущем экземпляре. См. f:\оаип\курсовой проект\texteditor\texteditor\view.h(15). </DESCRIPTION>
+    <FUNCTION>getSaveWarningDialogResult</FUNCTION>
+    <DECORATED>getSaveWarningDialogResult</DECORATED>
+    <FUNCLINE>96</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>view.c</FILENAME>
+      <LINE>96</LINE>
+      <COLUMN>5</COLUMN>
+    </SFA>
+    <DEFECTCODE>28253</DEFECTCODE>
+    <DESCRIPTION>Несогласованная аннотация для "getSaveWarningDialogResult": _Param_(3) содержит "SAL_pre SAL_notref SAL_null(__maybe) SAL_pre SAL_valid SAL_pre SAL_notref SAL_deref SAL_notref SAL_access(0x1)" в данном экземпляре. См. f:\оаип\курсовой проект\texteditor\texteditor\view.h(15). </DESCRIPTION>
+    <FUNCTION>getSaveWarningDialogResult</FUNCTION>
+    <DECORATED>getSaveWarningDialogResult</DECORATED>
+    <FUNCLINE>96</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>f:\оаип\курсовой проект\texteditor\texteditor\</FILEPATH>
+      <FILENAME>view.c</FILENAME>
+      <LINE>96</LINE>
+      <COLUMN>5</COLUMN>
+    </SFA>
+    <DEFECTCODE>28250</DEFECTCODE>
+    <DESCRIPTION>Несогласованная аннотация для "getSaveWarningDialogResult": предыдущий экземпляр содержит завершающие неаннотированные параметры. См. f:\оаип\курсовой проект\texteditor\texteditor\view.h(15). </DESCRIPTION>
+    <FUNCTION>getSaveWarningDialogResult</FUNCTION>
+    <DECORATED>getSaveWarningDialogResult</DECORATED>
+    <FUNCLINE>96</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>
