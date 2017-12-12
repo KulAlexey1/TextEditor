@@ -605,18 +605,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 								{
 									if (i == 0)
 									{
-										// Выделение памяти на 2 байт больше, так как необходимо хранить 
-										// терминальный символ и добавленный символ "\r"
-										fileText = (char*)calloc(strlen(paragraph) + 2, sizeof(char));
-										strcpy_s(fileText, strlen(paragraph) + 1, paragraph);
-										append(fileText, "\r", strlen(fileText));
+										// Выделение памяти на 1 байт больше, так как необходимо хранить терминальный символ
+										fileText = (char*)calloc(strlen(paragraph) + 1, sizeof(char));
+										strcpy_s(fileText, strlen(paragraph) + 1, paragraph);					
 									}
 									else
 									{
-										// Выделение памяти на 2 байта больше, так как необходимо хранить
-										// терминальный символ и добавленный символ "\r"
-										fileText = (char*)realloc(fileText, strlen(fileText) + strlen(paragraph) + 2);
-										append(paragraph, "\r", strlen(paragraph) + 1);
+										fileText = (char*)realloc(fileText, strlen(fileText) + strlen(paragraph) + 1);										
 										append(fileText, paragraph, strlen(fileText));
 									}
 								}
