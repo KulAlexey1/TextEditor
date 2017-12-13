@@ -131,22 +131,33 @@ BOOL getSaveWarningDialogResult(HWND hwnd, HWND hwndEdit, _In_opt_ DLGPROC lpDia
 	return flag;
 }
 
-char* stristr(const char *haystack, const char *needle) {
-	int c = tolower((unsigned char)*needle);
+char toLowerChar(char c)
+{
+	char x[1];
 
-	if (c == '\0')
+	x[0] = c;
+	CharLowerBuff(x, 1);
+
+	return x[0];
+}
+
+char* stristr(const char *haystack, const char *needle) 
+{	
+	int c = toLowerChar((unsigned char)*needle);
+
+	if (c == '\0')	
 		return (char *)haystack;
 
 	for (; *haystack; haystack++) 
 	{
-		if (tolower((unsigned char)*haystack) == c) 
+		if (toLowerChar((unsigned char)*haystack) == c)
 		{
 			for (unsigned int i = 1; ; i++) 
 			{
 				if (needle[i] == '\0')
 					return (char *)haystack;
 
-				if (tolower((unsigned char)haystack[i]) != tolower((unsigned char)needle[i]))
+				if (toLowerChar((unsigned char)haystack[i]) != toLowerChar((unsigned char)needle[i]))
 					break;
 			}
 		}
@@ -155,7 +166,8 @@ char* stristr(const char *haystack, const char *needle) {
 	return NULL;
 }
 
-char* strReplace(char *text, char *search, char *replace, BOOL withCaseSensitive) {
+char* strReplace(char *text, char *search, char *replace, BOOL withCaseSensitive) 
+{
 	char *buffer = NULL;
 	char *p = text;
 	int len;	

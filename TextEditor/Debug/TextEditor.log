@@ -1,4 +1,5 @@
-﻿  Main.c
-f:\оаип\курсовой проект\texteditor\texteditor\main.c(258): warning C4013: _tcsstr: нет определения; предполагается "extern" с возвратом типа "int"
+﻿  View.c
+f:\оаип\курсовой проект\texteditor\texteditor\view.c(89): warning C4244: =: преобразование "LRESULT" в "SHORT", возможна потеря данных
+f:\оаип\курсовой проект\texteditor\texteditor\view.c(95): warning C4244: =: преобразование "unsigned long" в "SHORT", возможна потеря данных
   TextEditor.vcxproj -> F:\ОАИП\Курсовой проект\TextEditor\Debug\TextEditor.exe
   TextEditor.vcxproj -> F:\ОАИП\Курсовой проект\TextEditor\Debug\TextEditor.pdb (Partial PDB)

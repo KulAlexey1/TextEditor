@@ -244,12 +244,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 			// Приравнивание регистров, если не установлена галочка "С учётом регистра"
 			if (!(lpfr->Flags & FR_MATCHCASE))
-			{
-				for (int i = 0; i < length; i++) 
-					editText[i] = tolower(editText[i]);				
-
-				for(int i = 0; i < iSingleLength; i++)
-					lpfr->lpstrFindWhat[i] = tolower(lpfr->lpstrFindWhat[i]);
+			{				
+				CharLowerBuff(editText, length);
+				CharLowerBuff(lpfr->lpstrFindWhat, iSingleLength);
 			}
 
 			// Функция _tcsstr, в случае обнаружения текста для поиска,
@@ -321,11 +318,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				// Приравнивание регистров, если не установлена галочка "С учётом регистра"
 				if (!(lpfr->Flags & FR_MATCHCASE))
 				{
-					for (int i = 0; i < (int)strlen(selText); i++)
-						selText[i] = tolower(selText[i]);
-
-					for (int i = 0; i < (int)strlen(lpfr->lpstrFindWhat); i++)
-						lpfr->lpstrFindWhat[i] = tolower(lpfr->lpstrFindWhat[i]);
+					CharLowerBuff(selText, strlen(selText));
+					CharLowerBuff(lpfr->lpstrFindWhat, strlen(lpfr->lpstrFindWhat));
 				}
 
 				if (strcmp(selText, lpfr->lpstrFindWhat) == 0)				 
@@ -739,8 +733,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					editText = (char*)calloc(editTextLen + 1, 1);
 					GetDlgItemText(hwnd, IDC_EDIT, editText, editTextLen + 1);					
 
-					for (int i = 0; i < editTextLen; i++)
-						editText[i] = tolower(editText[i]);
+					CharLowerBuff(editText, editTextLen);
 
 					SendMessage(hwndEdit, EM_SETSEL, (WPARAM)0, (LPARAM)-1);
 					SendMessage(hwndEdit, EM_REPLACESEL, (WPARAM)TRUE, (LPARAM)editText);
@@ -762,8 +755,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					editText = (char*)calloc(editTextLen + 1, 1);
 					GetDlgItemText(hwnd, IDC_EDIT, editText, editTextLen + 1);
 
-					for (int i = 0; i < editTextLen; i++)
-						editText[i] = toupper(editText[i]);
+					CharUpperBuff(editText, editTextLen);
 
 					SendMessage(hwndEdit, EM_SETSEL, (WPARAM)0, (LPARAM)-1);
 					SendMessage(hwndEdit, EM_REPLACESEL, (WPARAM)TRUE, (LPARAM)editText);
